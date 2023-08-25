@@ -3,7 +3,7 @@ function fetchInfo(callback) {
     var currentEmail = "";
     var userCsrfToken = "";
     var xhr = new XMLHttpRequest();
-    xhr.open("GET", "/users/" + utag_data.context.user.tuid + "/profile", false);
+    xhr.open("GET", "/users/" + __PLUGIN_STATE__.context.context.user.tuid + "/profile", false);
     xhr.onreadystatechange = function() {
         if (xhr.readyState === 4 && xhr.status === 200) {
             var data = JSON.parse(xhr.responseText);
@@ -17,7 +17,7 @@ function fetchInfo(callback) {
 
 function changeEmail(newEmail) {
     fetchInfo(function(userCsrfToken, currentEmail) {
-        var emailChangeUrl = "/users/" + utag_data.context.user.tuid + "/updateemail";
+        var emailChangeUrl = "/users/" + __PLUGIN_STATE__.context.context.user.tuid + "/updateemail";
         var requestData = { 
             "newEmail": newEmail,
             "hiddenNewEmail": currentEmail,
